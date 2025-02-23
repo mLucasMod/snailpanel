@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y nginx git openssl python3 && rm -rf /va
 
 RUN git clone https://github.com/mLucasMod/snailpanel.git /etc/snailpanel
 WORKDIR /etc/snailpanel
-RUN git checkout docker-deploy
+# RUN git checkout dev
 
 COPY apache2.conf /etc/apache2/apache2.conf
 COPY nginx.conf /etc/nginx/sites-available/snailpanel
@@ -18,4 +18,4 @@ RUN mkdir -p /etc/ssl/certs /etc/ssl/private && \
 
 EXPOSE 5000 5443
 
-CMD service apache2 start && nginx -g "daemon off;" & python3 -u daemon/bin/start_daemon.py
+CMD service apache2 start && nginx -g "daemon off;" & python3 -u daemon/start_daemon.py
