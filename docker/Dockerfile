@@ -2,7 +2,7 @@ FROM php:8.2-apache
 
 RUN apt-get update && apt-get install -y nginx git openssl python3 && rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/mLucasMod/snailpanel.git#reset /etc/snailpanel
+RUN git clone https://github.com/mLucasMod/snailpanel.git /etc/snailpanel
 WORKDIR /etc/snailpanel
 
 COPY apache2.conf /etc/apache2/apache2.conf
@@ -17,4 +17,4 @@ RUN mkdir -p /etc/ssl/certs /etc/ssl/private && \
 
 EXPOSE 5000 5443
 
-CMD service apache2 start && nginx -g "daemon off;" & python3 -u daemon/start_daemon.py
+CMD service apache2 start && nginx -g "daemon off;" & python3 -u daemon/bin/start_daemon.py
