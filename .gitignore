@@ -1,0 +1,8 @@
+.vscode/
+__pycache__/
+
+backend/logs/
+daemon/logs/
+frontend/test/
+
+daemon.pid
