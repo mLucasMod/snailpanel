@@ -1,6 +1,6 @@
 import os
 
-from ..config import PID_FILE
+from config import PID_FILE
 from src.daemon import Daemon
 
 def run():
