@@ -2,8 +2,9 @@ FROM php:8.2-apache
 
 RUN apt-get update && apt-get install -y nginx git openssl python3 && rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/mLucasMod/snailpanel.git#reset /etc/snailpanel
+RUN git clone https://github.com/mLucasMod/snailpanel.git /etc/snailpanel
 WORKDIR /etc/snailpanel
+# RUN git checkout dev
 
 COPY apache2.conf /etc/apache2/apache2.conf
 COPY nginx.conf /etc/nginx/sites-available/snailpanel
