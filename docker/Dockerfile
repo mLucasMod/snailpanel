@@ -4,11 +4,16 @@ RUN apt-get update && apt-get install -y nginx git openssl python3 && rm -rf /va
 
 RUN git clone https://github.com/mLucasMod/snailpanel.git /etc/snailpanel
 WORKDIR /etc/snailpanel
-# RUN git checkout dev
+RUN git checkout origin/frontend
 
 COPY apache2.conf /etc/apache2/apache2.conf
+RUN a2enmod rewrite
+
 COPY nginx.conf /etc/nginx/sites-available/snailpanel
 RUN ln -s /etc/nginx/sites-available/snailpanel /etc/nginx/sites-enabled/
+
+RUN rm /etc/nginx/sites-enabled/default
+RUN rm /etc/nginx/sites-available/default
 
 RUN mkdir -p /etc/ssl/certs /etc/ssl/private && \
     openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
