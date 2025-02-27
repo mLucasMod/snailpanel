@@ -1,8 +1,4 @@
 .vscode/
 __pycache__/
 
-backend/logs/
-daemon/logs/
-
-daemon.pid
-docker/Dockerfile
+server/logs/

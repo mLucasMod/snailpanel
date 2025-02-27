@@ -1,7 +1,0 @@
-# Activer RewriteEngine pour les règles de réécriture
-RewriteEngine On
-
-# Rediriger les requêtes vers index.php si le fichier demandé n'existe pas
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ index.php [QSA,L]

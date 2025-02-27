@@ -1,1 +1,0 @@
-PID_FILE = '/tmp/daemon.pid'
