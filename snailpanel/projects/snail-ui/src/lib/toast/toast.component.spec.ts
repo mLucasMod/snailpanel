@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SnailUiComponent } from './snail-ui.component';
+import { SnailToastComponent } from './toast.component';
 
-describe('SnailUiComponent', () => {
-  let component: SnailUiComponent;
-  let fixture: ComponentFixture<SnailUiComponent>;
+describe('ToastComponent', () => {
+  let component: SnailToastComponent;
+  let fixture: ComponentFixture<SnailToastComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SnailUiComponent]
+      imports: [SnailToastComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SnailUiComponent);
+    fixture = TestBed.createComponent(SnailToastComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

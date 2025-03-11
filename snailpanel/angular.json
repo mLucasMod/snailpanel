@@ -102,7 +102,7 @@
       "projectType": "library",
       "root": "projects/snail-api",
       "sourceRoot": "projects/snail-api/src",
-      "prefix": "lib",
+      "prefix": "snail-api",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
@@ -135,7 +135,7 @@
       "projectType": "library",
       "root": "projects/snail-ui",
       "sourceRoot": "projects/snail-ui/src",
-      "prefix": "lib",
+      "prefix": "snail-ui",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",

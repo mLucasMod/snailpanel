@@ -1,0 +1,69 @@
+:root {
+    /* Standard */
+    --color-standard-fill: white;
+    --color-standard-hover-fill: #f0f0f0;
+    --color-standard-active-fill: #e0e0e0;
+    --color-standard-font: black;
+
+    /* Theming */
+    --color-primary-fill: #981ef6;
+    --color-primary-hover-fill: #871bd9;
+    --color-primary-active-fill: #750ec2;
+    --color-primary-font: white;
+
+    --color-secondary-fill: #981ef6;
+    --color-secondary-hover-fill: #871bd9;
+    --color-secondary-active-fill: #750ec2;
+    --color-secondary-font: white;
+
+    /* Level 1 */
+    --color-level1-fill: #f8f9fa;
+    --color-level1-hover-fill: #e9ecef;
+    --color-level1-active-fill: #dee2e6;
+    --color-level1-font: #212529;
+
+    /* Level 2 */
+    --color-level2-fill: #e9ecef;
+    --color-level2-hover-fill: #dee2e6;
+    --color-level2-active-fill: #ced4da;
+    --color-level2-font: #343a40;
+
+    /* Level 3 */
+    --color-level3-fill: #dee2e6;
+    --color-level3-hover-fill: #ced4da;
+    --color-level3-active-fill: #adb5bd;
+    --color-level3-font: #495057;
+
+    /* Level 4 */
+    --color-level4-fill: #ced4da;
+    --color-level4-hover-fill: #adb5bd;
+    --color-level4-active-fill: #868e96;
+    --color-level4-font: #6c757d;
+
+    /* Level 5 */
+    --color-level5-fill: #adb5bd;
+    --color-level5-hover-fill: #868e96;
+    --color-level5-active-fill: #495057;
+    --color-level5-font: #f8f9fa;
+
+    /* Colors */
+    --color-danger-fill: #F24F4F;
+    --color-danger-hover-fill: #d93f3f;
+    --color-danger-active-fill: #bf2f2f;
+    --color-danger-font: white;
+
+    --color-warn-fill: #FFAE00;
+    --color-warn-hover-fill: #e09a00;
+    --color-warn-active-fill: #c48700;
+    --color-warn-font: white;
+
+    --color-success-fill: #58D638;
+    --color-success-hover-fill: #4cbf32;
+    --color-success-active-fill: #42a62d;
+    --color-success-font: white;
+
+    --color-info-fill: #0084FF;
+    --color-info-hover-fill: #0077e6;
+    --color-info-active-fill: #006acc;
+    --color-info-font: white;
+}

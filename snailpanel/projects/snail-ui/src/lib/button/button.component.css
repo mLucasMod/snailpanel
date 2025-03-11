@@ -1,0 +1,75 @@
+:host {
+    --p-button-padding-x: 16px;
+    --p-button-padding-y: 8px;
+    --p-button-border-radius: 8px;
+
+    /* primary */
+    --p-button-primary-color: var(--color-primary-font);
+    --p-button-primary-hover-color: var(--color-primary-font);
+    --p-button-primary-active-color: var(--color-primary-font);
+
+    --p-button-primary-background: var(--color-primary-fill);
+    --p-button-primary-hover-background: var(--color-primary-hover-fill);
+    --p-button-primary-active-background: var(--color-primary-active-fill);
+
+    /* success */
+    --p-button-success-color: var(--color-success-font);
+    --p-button-success-hover-color: var(--color-success-font);
+    --p-button-success-active-color: var(--color-success-font);
+
+    --p-button-success-background: var(--color-success-fill);
+    --p-button-success-hover-background: var(--color-success-hover-fill);
+    --p-button-success-active-background: var(--color-success-active-fill);
+
+    /* warn */
+    --p-button-warn-color: var(--color-warn-font);
+    --p-button-warn-hover-color: var(--color-warn-font);
+    --p-button-warn-active-color: var(--color-warn-font);
+
+    --p-button-warn-background: var(--color-warn-fill);
+    --p-button-warn-hover-background: var(--color-warn-hover-fill);
+    --p-button-warn-active-background: var(--color-warn-active-fill);
+
+    /* danger */
+    --p-button-danger-color: var(--color-danger-font);
+    --p-button-danger-hover-color: var(--color-danger-font);
+    --p-button-danger-active-color: var(--color-danger-font);
+
+    --p-button-danger-background: var(--color-danger-fill);
+    --p-button-danger-hover-background: var(--color-danger-hover-fill);
+    --p-button-danger-active-background: var(--color-danger-active-fill);
+
+    /* info */
+    --p-button-info-color: var(--color-info-font);
+    --p-button-info-hover-color: var(--color-info-font);
+    --p-button-info-active-color: var(--color-info-font);
+
+    --p-button-info-background: var(--color-info-fill);
+    --p-button-info-hover-background: var(--color-info-hover-fill);
+    --p-button-info-active-background: var(--color-info-active-fill);
+}
+
+.snail-btn-primary {
+    background-color: var(--color-primary-fill);
+    color: var(--color-primary-font);
+}
+
+.snail-btn-success {
+    background-color: var(--color-success-fill);
+    color: var(--color-success-font);
+}
+
+.snail-btn-warn {
+    background-color: var(--color-warning-fill);
+    color: var(--color-warning-font);
+}
+
+.snail-btn-danger {
+    background-color: var(--color-danger-fill);
+    color: var(--color-danger-font);
+}
+
+.snail-btn-info {
+    background-color: var(--color-info-fill);
+    color: var(--color-info-font);
+}

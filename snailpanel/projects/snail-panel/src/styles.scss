@@ -1,2 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+@use "main.scss";
+@use "light.scss";
 @import "primeicons/primeicons.css";
+
+html {
+    font-family: Inter, Verdana, Geneva, Tahoma, sans-serif;
+    height: 100%;
+}
+
+body {
+    background-color: var(--color-standard-fill);
+    height: 100%;
+    margin: 0;
+}

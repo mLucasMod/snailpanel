@@ -1,0 +1,23 @@
+:host ::ng-deep {
+    .p-button, span {
+        text-align: left;
+        width: 100%;
+    }
+
+    .p-button {
+        // margin-top: 5px;
+    }
+
+    --p-button-padding-x: 25px;
+    --p-button-padding-y: 25px;
+
+    --p-button-primary-background: var(--color-level2-fill);
+    --p-button-primary-hover-background: var(--color-level3-hover-fill);
+    --p-button-primary-active-background: var(--color-level3-active-fill);
+    --p-button-primary-color: var(--color-level2-font);
+}
+
+.sidebar-container {
+    height: 100%;
+    background-color: var(--color-level2-fill);
+}

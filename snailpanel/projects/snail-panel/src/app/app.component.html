@@ -1,20 +1,19 @@
-@if (authService.isLoggedIn()) {
-<button (click)="authService.logout()">Se déconnecter</button>
-<nav>
-    <a routerLink="/">Dashboard</a>
-    <a routerLink="/servers">Servers</a>
-    <a routerLink="/templates">Templates</a>
-    <a routerLink="/users">Users</a>
-    <a routerLink="/settings">Settings</a>
-</nav>
-} @else {
-<button (click)="authService.login()">Se connecter</button>
-<nav>
-    <a routerLink="/signin">Signin</a>
-    <a routerLink="/signup">Signup</a>
-</nav>
-}
-
-<span class="pi pi-user"></span>
-
-<router-outlet />
+<as-split direction="vertical" unit="pixel" [gutterSize]="0">
+    <as-split-area [size]="75" [lockSize]="true">
+        <app-header/>
+    </as-split-area>
+    <as-split-area size="*">
+        <as-split direction="horizontal" unit="pixel" [gutterSize]="0">
+            @if (isSidebarVisible) {
+            <as-split-area [size]="250" [lockSize]="true">
+                <app-sidebar/>
+            </as-split-area>
+            }
+            <as-split-area size="*">
+                <div class="app-content">
+                    <router-outlet/>
+                </div>
+            </as-split-area>
+        </as-split>
+    </as-split-area>
+</as-split>

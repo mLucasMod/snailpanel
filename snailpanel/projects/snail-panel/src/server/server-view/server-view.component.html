@@ -1,0 +1,33 @@
+<div class="snail-container">
+    <div class="server-header">
+        <as-split direction="horizontal" unit="pixel" [gutterSize]="0">
+            <as-split-area [size]="40" [lockSize]="true">
+                <span class="server-header-icon pi pi-circle-on"></span>
+            </as-split-area>
+            <as-split-area size="*">
+                <div>
+                    <b class="server-header-name">Minecraft</b>
+                    <span class="server-header-id">#a2baf3</span>
+                </div>
+                <div class="server-header-address">proxy.mlucas.ch:25565</div>
+            </as-split-area>
+            <as-split-area [size]="200" [lockSize]="true">
+                <snail-button label="Start" color="success"></snail-button>
+                <snail-button label="Stop" color="warn"></snail-button>
+                <snail-button label="Kill" color="danger"></snail-button>
+            </as-split-area>
+        </as-split>
+    </div>
+    
+    <div class="server-body">
+        <div class="server-console"></div>
+        <as-split class="server-console-interaction" direction="horizontal" unit="pixel" [gutterSize]="0">
+            <as-split-area size="*">
+                <input class="server-console-input">
+            </as-split-area>
+            <as-split-area [size]="80" [lockSize]="true">
+                <button class="server-console-button">Send</button>
+            </as-split-area>
+        </as-split>
+    </div>
+</div>

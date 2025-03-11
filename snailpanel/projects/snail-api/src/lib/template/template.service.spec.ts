@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SnailApiService } from './snail-api.service';
+import { TemplateService } from './template.service';
 
-describe('SnailApiService', () => {
-  let service: SnailApiService;
+describe('TemplateService', () => {
+  let service: TemplateService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SnailApiService);
+    service = TestBed.inject(TemplateService);
   });
 
   it('should be created', () => {

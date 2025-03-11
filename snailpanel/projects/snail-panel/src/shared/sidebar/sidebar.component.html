@@ -1,1 +1,11 @@
-<p>sidebar works!</p>
+<div class="sidebar-container">
+    @for (button of buttons; track button) {
+    <div class="sidebar-button-container">
+        <p-button
+            [icon]="button.icon"
+            [label]="button.label"
+            (onClick)="goToDashboard(button.redirect)">
+        </p-button>
+    </div>
+    }
+</div>

@@ -16,12 +16,8 @@
     "moduleResolution": "bundler",
     "importHelpers": true,
     "paths": {
-      "snail-api": [
-        "./dist/snail-api"
-      ],
-      "snail-ui": [
-        "./dist/snail-ui"
-      ]
+      "@snail/api": ["./projects/snail-api/src/public-api.ts"],
+      "@snail/ui": ["./projects/snail-ui/src/public-api.ts"]
     },
     "target": "ES2022",
     "module": "ES2022"

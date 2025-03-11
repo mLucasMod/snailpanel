@@ -1,31 +1,98 @@
 import { Routes } from '@angular/router';
-import { authGuard, signAuthGuard, SigninComponent, SignupComponent } from '../auth';
+import { signedAuthGuard, notSignedAuthGuard, SigninComponent, SignupComponent } from '../auth';
 import { DashboardComponent } from '../dashboard';
-import { ServerAddComponent, ServerListComponent, ServerViewComponent } from '../servers';
+import { ServerAddComponent, ServerListComponent, ServerViewComponent } from '../server';
 import { SettingsComponent } from '../settings';
-import { TemplateAddComponent, TemplateListComponent, TemplateViewComponent } from '../templates';
-import { UserAddComponent, UserListComponent, UserViewComponent } from '../users';
+import { TemplateAddComponent, TemplateListComponent, TemplateViewComponent } from '../template';
+import { UserAddComponent, UserListComponent, UserViewComponent } from '../user';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 export const routes: Routes = [
-    { path: '', component: DashboardComponent, canActivate: [authGuard] },
+    {
+        path: 'signin',
+        title: "Snailpanel - Signin",
+        canActivate: [notSignedAuthGuard],
+        component: SigninComponent
+    },
+    {
+        path: 'signup',
+        title: "Snailpanel - Signup",
+        canActivate: [notSignedAuthGuard],
+        component: SignupComponent
+    },
+    
+    {
+        path: '',
+        title: "Snailpanel - Dashboard",
+        canActivate: [signedAuthGuard],
+        component: DashboardComponent
+    },
 
-    { path: 'signin', component: SigninComponent, canActivate: [signAuthGuard] },
-    { path: 'signup', component: SignupComponent, canActivate: [signAuthGuard] },
+    {
+        path: 'addserver',
+        title: "Snailpanel - Add server",
+        canActivate: [signedAuthGuard],
+        component: ServerAddComponent
+    },
+    {
+        path: 'servers',
+        title: "Snailpanel - Servers",
+        canActivate: [signedAuthGuard],
+        component: ServerListComponent
+    },
+    {
+        path: 'servers/:id',
+        title: "Snailpanel - Edit server",
+        canActivate: [signedAuthGuard],
+        component: ServerViewComponent
+    },
 
-    { path: 'addserver', component: ServerAddComponent, canActivate: [authGuard] },
-    { path: 'servers', component: ServerListComponent, canActivate: [authGuard] },
-    { path: 'servers/:id', component: ServerViewComponent, canActivate: [authGuard] },
+    {
+        path: 'addtemplate',
+        title: "Snailpanel - Add template",
+        canActivate: [signedAuthGuard],
+        component: TemplateAddComponent
+    },
+    {
+        path: 'templates',
+        title: "Snailpanel - Templates",
+        canActivate: [signedAuthGuard],
+        component: TemplateListComponent
+    },
+    {
+        path: 'templates/:id',
+        title: "Snailpanel - Edit template",
+        canActivate: [signedAuthGuard],
+        component: TemplateViewComponent
+    },
 
-    { path: 'addtemplate', component: TemplateAddComponent, canActivate: [authGuard] },
-    { path: 'templates', component: TemplateListComponent, canActivate: [authGuard] },
-    { path: 'templates/:id', component: TemplateViewComponent, canActivate: [authGuard] },
+    { path: 'adduser',
+        title: "Snailpanel - Add user",
+        canActivate: [signedAuthGuard],
+        component: UserAddComponent
+    },
+    { path: 'users',
+        title: "Snailpanel - Users",
+        canActivate: [signedAuthGuard],
+        component: UserListComponent
+    },
+    {
+        path: 'users/:id',
+        title: "Snailpanel - Edit user",
+        canActivate: [signedAuthGuard],
+        component: UserViewComponent
+    },
 
-    { path: 'adduser', component: UserAddComponent, canActivate: [authGuard] },
-    { path: 'users', component: UserListComponent, canActivate: [authGuard] },
-    { path: 'users/:id', component: UserViewComponent, canActivate: [authGuard] },
+    {
+        path: 'settings',
+        title: "Snailpanel - Settings",
+        canActivate: [signedAuthGuard],
+        component: SettingsComponent
+    },
 
-    { path: 'settings', component: SettingsComponent, canActivate: [authGuard] },
-
-    { path: '**', component: NotFoundComponent }
+    {
+        path: '**',
+        title: "Snailpanel - Not found",
+        component: NotFoundComponent
+    }
 ]

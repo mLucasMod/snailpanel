@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SnailApiComponent } from './snail-api.component';
+import { SnailButtonComponent } from './button.component';
 
-describe('SnailApiComponent', () => {
-  let component: SnailApiComponent;
-  let fixture: ComponentFixture<SnailApiComponent>;
+describe('ButtonComponent', () => {
+  let component: SnailButtonComponent;
+  let fixture: ComponentFixture<SnailButtonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SnailApiComponent]
+      imports: [SnailButtonComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SnailApiComponent);
+    fixture = TestBed.createComponent(SnailButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

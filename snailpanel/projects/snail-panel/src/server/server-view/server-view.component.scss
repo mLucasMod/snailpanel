@@ -1,0 +1,62 @@
+.server-header {
+    padding: 20px;
+    background-color: var(--color-level2-fill);
+    border-radius: 20px;
+    
+    .server-header-icon {
+        color: var(--color-danger-fill);
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+    .server-header-name {
+        font-size: 18px;
+    }
+    .server-header-id {
+        color: var(--color-level4-font);
+        font-weight: 500;
+        margin: 8px;
+    }
+    .server-header-address {
+        color: var(--color-level4-font);
+        font-weight: 300;
+    }
+}
+
+.server-body {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: var(--color-level2-fill);
+    border-radius: 20px;
+
+    .server-console {
+        height: 500px;
+        background-color: black;
+        border-radius: 10px;
+    }
+
+    .server-console-interaction {
+        margin-top: 20px;
+
+        .server-console-input {
+            height: 50px;
+            width: calc(100% - 10px);
+            border: 1px solid var(--color-level4-fill);
+            border-radius: 10px;
+        }
+        .server-console-button {
+            height: 50px;
+            width: 100%;
+            border: 0px solid black;
+            background-color: var(--color-level4-fill);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .server-console-button:hover {
+            background-color: var(--color-level4-hover-fill);
+        }
+        .server-console-button:active {
+            background-color: var(--color-level4-active-fill);
+        }
+    }
+}

@@ -1,0 +1,31 @@
+.header-div {
+    background-color: var(--color-primary-fill);
+    color: var(--color-primary-font);
+
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.header-logo {
+    height: 75px;
+
+    img {
+        height: inherit;
+    }
+}
+
+.header-title {
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.header-actions {
+    width: 100%;
+    text-align: end;
+    > * {
+        margin-right: 25px;
+        font-size: 20px;
+    }
+}
