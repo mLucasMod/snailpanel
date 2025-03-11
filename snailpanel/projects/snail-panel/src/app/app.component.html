@@ -1,0 +1,20 @@
+@if (authService.isLoggedIn()) {
+<button (click)="authService.logout()">Se déconnecter</button>
+<nav>
+    <a routerLink="/">Dashboard</a>
+    <a routerLink="/servers">Servers</a>
+    <a routerLink="/templates">Templates</a>
+    <a routerLink="/users">Users</a>
+    <a routerLink="/settings">Settings</a>
+</nav>
+} @else {
+<button (click)="authService.login()">Se connecter</button>
+<nav>
+    <a routerLink="/signin">Signin</a>
+    <a routerLink="/signup">Signup</a>
+</nav>
+}
+
+<span class="pi pi-user"></span>
+
+<router-outlet />
