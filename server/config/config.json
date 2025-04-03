@@ -1,5 +1,0 @@
-{
-    "api_port": 5000,
-    "daemon_log_level": "debug",
-    "log_file": "logs/daemon.log"
-}
