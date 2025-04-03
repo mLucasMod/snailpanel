@@ -4,7 +4,11 @@
     </div>
     <div class="header-title">Snailpanel</div>
     <div class="header-actions">
-        <span class="pi pi-lightbulb"></span>
-        <span class="pi pi-user"></span>
+        <p-button icon="pi pi-lightbulb" size="large"></p-button>
+        @if (authService.check()) {
+            <p-button icon="pi pi-user" size="large" (onClick)="logout()"></p-button>
+        } @else {
+            <p-button icon="pi pi-user" size="large" (onClick)="login()"></p-button>
+        }
     </div>
 </div>

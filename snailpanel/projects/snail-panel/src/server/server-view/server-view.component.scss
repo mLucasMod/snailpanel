@@ -21,6 +21,11 @@
         color: var(--color-level4-font);
         font-weight: 300;
     }
+    .server-header-buttons {
+        > * {
+            padding-left: 10px;
+        }
+    }
 }
 
 .server-body {

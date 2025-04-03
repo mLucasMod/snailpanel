@@ -4,7 +4,7 @@
     </as-split-area>
     <as-split-area size="*">
         <as-split direction="horizontal" unit="pixel" [gutterSize]="0">
-            @if (isSidebarVisible) {
+            @if (isSidebarVisible && authService.isLoggedIn()) {
             <as-split-area [size]="250" [lockSize]="true">
                 <app-sidebar/>
             </as-split-area>

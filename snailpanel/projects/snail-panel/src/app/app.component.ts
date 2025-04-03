@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { AfterContentInit, AfterViewInit, Component, HostListener } from '@angular/core';
+import { AfterViewInit, Component, HostListener } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { AngularSplitModule } from 'angular-split';
 import { HeaderComponent, SidebarComponent } from '../shared';
+import { AuthService } from '@snail/api';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,7 @@ export class AppComponent implements AfterViewInit {
   public innerWidth: number = window.innerWidth;
   public isSidebarVisible: boolean = true;
 
-  constructor() {
+  constructor(protected authService: AuthService) {
     this.checkSidebarVisibility();
   }
 

@@ -93,6 +93,7 @@ export const routes: Routes = [
     {
         path: '**',
         title: "Snailpanel - Not found",
+        // canActivate: [signedAuthGuard],
         component: NotFoundComponent
     }
 ]

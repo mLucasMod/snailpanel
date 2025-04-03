@@ -2,6 +2,8 @@
  * Public API Surface of snail-api
  */
 
+export * from './lib/auth/auth.service';
+
 export * from './lib/server/server.service';
 // export * from './lib/server/server';
 
