@@ -19,10 +19,14 @@ import { AuthService } from '@snail/api';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements AfterViewInit {
-  public innerWidth: number = window.innerWidth;
-  public isSidebarVisible: boolean = true;
+  public isSidebarVisible = true;
+  public innerWidth = window.innerWidth;
 
   constructor(protected authService: AuthService) {
+    this.checkSidebarVisibility();
+  }
+
+  ngAfterViewInit(): void {
     this.checkSidebarVisibility();
   }
 
@@ -31,11 +35,7 @@ export class AppComponent implements AfterViewInit {
     this.innerWidth = window.innerWidth;
     this.checkSidebarVisibility();
   }
-
-  ngAfterViewInit(): void {
-    this.checkSidebarVisibility();
-  }
-
+  
   private checkSidebarVisibility() {
     this.isSidebarVisible = this.innerWidth > 768;
   }

@@ -5,10 +5,8 @@
     <div class="header-title">Snailpanel</div>
     <div class="header-actions">
         <p-button icon="pi pi-lightbulb" size="large"></p-button>
-        @if (authService.check()) {
+        @if (authService.isAuthenticated()) {
             <p-button icon="pi pi-user" size="large" (onClick)="logout()"></p-button>
-        } @else {
-            <p-button icon="pi pi-user" size="large" (onClick)="login()"></p-button>
         }
     </div>
 </div>

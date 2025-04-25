@@ -1,66 +1,54 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   
-  private authUrl = 'https://localhost:5000/auth';
+  private authUrl = 'http://192.168.1.52:5000/auth/';
+  
+  public isAuthenticated = signal<boolean>(false);
 
-  private isAuthenticated = false;
+  constructor(private router: Router, private http: HttpClient) {}
 
-  constructor(private router: Router, private http: HttpClient) {
-    this.check();
+  async login(login: string, password: string): Promise<void> {
+    try {
+      await firstValueFrom(
+        this.http.post(this.authUrl, { "login": login, "password": password }, { withCredentials: true })
+      );
+      await this.router.navigate(['/']);
+      this.isAuthenticated.set(true);
+    } catch (error) {
+      console.error('Erreur lors de l\'authentification:', error);
+    }
   }
 
-  login(username: string, password: string) {
-    // this.isAuthenticated = true;
-    // localStorage.setItem('auth', 'true');
-    this.http.post(`${this.authUrl}/login`, { username, password }, { withCredentials: true });
-    this.router.navigate(['/']);
+  async logout(): Promise<void> {
+    try {
+      await firstValueFrom(
+        this.http.delete(this.authUrl, { withCredentials: true })
+      );
+      await this.router.navigate(['/signin']);
+      this.isAuthenticated.set(false);
+    } catch (error) {
+      console.error('Erreur lors de l\'authentification:', error);
+    }
   }
 
-  logout() {
-    // this.isAuthenticated = false;
-    // localStorage.removeItem('auth');
-    this.http.post(`${this.authUrl}/logout`, {}, { withCredentials: true });
-    this.router.navigate(['/signin']);
+  async refresh(): Promise<boolean> {
+    try {
+      const response = await firstValueFrom(
+        this.http.get<{ authenticated: boolean }>(this.authUrl, { withCredentials: true })
+      );
+      this.isAuthenticated.set(response.authenticated);
+      return response.authenticated;
+    } catch (error) {
+      console.error('Erreur lors de l\'authentification:', error);
+      this.isAuthenticated.set(false);
+      return false;
+    }
   }
-
-  check(): boolean {
-    this.http.get(`${this.authUrl}/check`, { withCredentials: true });
-    return this.isAuthenticated;
-  }
-
-  // isLoggedIn(): boolean {
-  //   return this.isAuthenticated || localStorage.getItem('auth') === 'true';
-  // }
-
-  // private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
-  // public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
-
-  // constructor(private http: HttpClient) {
-  //   this.check();
-  // }
-
-  // login(username: string, password: string): Observable<any> {
-  //   return this.http.post(`${this.authUrl}/login`, { username, password }, { withCredentials: true }).pipe(
-  //     tap(() => this.isAuthenticatedSubject.next(true))
-  //   );
-  // }
-
-  // logout(): Observable<any> {
-  //   return this.http.post(`${this.authUrl}/logout`, {}, { withCredentials: true }).pipe(
-  //     tap(() => this.isAuthenticatedSubject.next(false))
-  //   );
-  // }
-
-  // check(): void {
-  //   this.http.get(`${this.authUrl}/check`, { withCredentials: true }).subscribe({
-  //     next: () => this.isAuthenticatedSubject.next(true),
-  //     error: () => this.isAuthenticatedSubject.next(false)
-  //   });
-  // }
 }
