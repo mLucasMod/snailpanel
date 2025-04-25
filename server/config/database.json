@@ -1,6 +1,10 @@
 {
-    "host": "192.168.1.10",
-    "user": "snailpanel",
-    "password": "Pa$$w0rd1234",
-    "database": "snailpanel"
+    "database": {
+        "type": "sqlite",
+        "path": "database.db",
+        "host": "192.168.1.10",
+        "user": "snailpanel",
+        "password": "Pa$$w0rd1234",
+        "database": "snailpanel"
+    }
 }

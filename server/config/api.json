@@ -1,0 +1,29 @@
+{
+    "flask": {
+        "host": "0.0.0.0",
+        "port": 5000,
+        "debug": false
+    },
+    "jwt": {
+        "secret_key": "1234",
+        "cookie_secure": false,
+        "cookie_csrf_protect": false,
+        "token_location": ["cookies"]
+    },
+    "cors": {
+        "supports_credentials": true,
+        "origins": ["http://localhost:4200", "http://192.168.1.52:4200"],
+        "allow_headers": ["Content-Type", "Authorization"],
+        "allow_methods": ["GET", "POST", "PATCH", "DELETE", "OPTIONS"]
+    },
+    "cookie": {
+        "httponly": true,
+        "secure": false,
+        "samesite": "Strict",
+        "max_age": 7200
+    },
+    "logs": {
+        "path": "logs/api.log",
+        "level": "debug"
+    }
+}
