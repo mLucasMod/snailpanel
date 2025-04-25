@@ -4,14 +4,13 @@ from flask_jwt_extended import JWTManager
 from config import get_api_config
 
 def init_extensions(app: Flask):
-    # JWT
     config = get_api_config("jwt")
     jwt = JWTManager(app)
 
-    app.config["JWT_SECRET_KEY"] = config["secret_key"] # Clé secrète pour signer les tokens
-    app.config["JWT_TOKEN_LOCATION"] = config["token_location"] # Indique que les JWT sont stockés dans un cookie
-    app.config["JWT_COOKIE_SECURE"] = config["cookie_secure"]  # ⚠ À mettre sur True en production (HTTPS uniquement)
-    app.config["JWT_COOKIE_CSRF_PROTECT"] = config["cookie_csrf_protect"]  # Désactive la protection CSRF pour Postman (à activer plus tard)
+    app.config["JWT_SECRET_KEY"] = config["secret_key"] # Secret key for signing tokens
+    app.config["JWT_TOKEN_LOCATION"] = config["token_location"] # Indicate that JWTs are stored in a cookie
+    app.config["JWT_COOKIE_SECURE"] = config["cookie_secure"] # Set True for production (HTTPS only)
+    app.config["JWT_COOKIE_CSRF_PROTECT"] = config["cookie_csrf_protect"] # Disable CSRF protection for Postman (to be activated later)
 
     @jwt.expired_token_loader
     def expired_token(jwt_header, jwt_payload):
@@ -29,7 +28,6 @@ def init_extensions(app: Flask):
             jsonify({"status": 401, "error": "TOKEN_MISSING",}), 401,
         )
 
-    # CORS
     config = get_api_config("cors")
     CORS(
         app,
