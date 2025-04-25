@@ -1,28 +1,36 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, abort, jsonify, make_response, request
 from api.app.users.controller import UserController
 
 user_bp = Blueprint('users', __name__)
 
 @user_bp.route('/', methods=['GET'])
-def get_users():
-    users = UserController.getAllUsers()
-    return jsonify(users), 200
+async def get_users():
+    users = await UserController.getAllUsers()
+    return jsonify({"users": users}), 200
 
 @user_bp.route('/', methods=['POST'])
-def add_user():
+async def add_user():
     data = request.json
-    new_user = UserController.addUser(data)
-    return jsonify(new_user), 201
+    username: str = data.get("username")
+    email: str = data.get("email")
+    password: str = data.get("password")
+
+    user_id = await UserController.addUser(username, email, password)
+    return jsonify(user_id), 201
 
 @user_bp.route('/<int:user_id>', methods=['GET'])
-def get_user(user_id):
-    user = UserController.getUser(user_id)
-    if user:
-        return jsonify(user), 200
-    else:
-        return jsonify({"error": "User not found"}), 404
+async def get_user(user_id):
+    user = await UserController.getUser(user_id)
+    if not user:
+        abort(404)
+
+    return jsonify(user), 200
 
 @user_bp.route('/<int:user_id>', methods=['DELETE'])
-def del_user(user_id):
-    new_user = UserController.delUser(user_id)
-    return jsonify(new_user), 201
+async def del_user(user_id):
+    result = await UserController.delUser(user_id)
+
+    if not result:
+        abort(409)
+
+    return make_response(), 204

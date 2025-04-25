@@ -1,23 +1,23 @@
-from api.app.users.user import User
-
-from daemon.daemon import Daemon
+from typing import List, Union
+from api.app.users.entity import User
+from database.sqlite import Database
 
 class UserController:
-    def getAllUsers() -> list[User]:
-        users = [
-            User(1, "test1").toJson(),
-            User(2, "test2").toJson(),
-            User(3, "test3").toJson()
-        ]
-        Daemon.do_something()
-        return {"users": users}
+    @staticmethod
+    async def getAllUsers() -> List[User]:
+        rows = await Database.fetchall("SELECT * FROM Users")
+        return [User.from_json(row) for row in rows]
 
-    def addUser(name: str) -> int:
-        pass
+    @staticmethod
+    async def addUser(username: str, email: str, password: str) -> int:
+        return await Database.insert("INSERT INTO Users (username, email, password) VALUES (?, ?, ?)", (username, email, password))
 
-    def getUser(id: int) -> User|bool:
-        user = User(id, f"test{id}").toJson()
-        return user
+    @staticmethod
+    async def getUser(id: int) -> Union[User, bool]:
+        row = await Database.fetchone("SELECT * FROM Users WHERE idUser = ?", (id,))
+        return User.from_json(row) if row else False
 
-    def delUser(self, id: int) -> bool:
-        pass
+    @staticmethod
+    async def delUser(id: int) -> bool:
+        affected = await Database.execute("DELETE FROM Users WHERE idUser = ?", (id,))
+        return affected > 0

@@ -1,49 +1,51 @@
 from datetime import timedelta
 from flask import Blueprint, abort, jsonify, make_response, request
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
+from api.app.auth.controller import AuthController
 
 auth_bp = Blueprint('auth', __name__)
 
-users_db = {
-    "root": "1234",
-    "test": "1234"
-}
-
 @auth_bp.route("/", methods=["POST"])
-def login():
+async def login():
     data = request.json
-    username: str = data.get("username")
+    login: str = data.get("login")
     password: str = data.get("password")
 
-    if username not in users_db:
+    if not login or not password:
         abort(401)
 
-    if (password != users_db[username]):
+    user = await AuthController.findUser(login, password)
+
+    if not user:
         abort(401)
 
-    access_token = create_access_token(identity=username, expires_delta=timedelta(hours=2))
+    access_token = create_access_token(identity=user.username, expires_delta=timedelta(hours=2))
 
-    # Définir un cookie HttpOnly sécurisé
-    response = make_response(jsonify({"message": "Connexion réussie"}))
+    # TODO get from config file
+    # Set a secure HttpOnly cookie
+    response = make_response()
     response.set_cookie(
         "access_token_cookie",
         access_token,
-        httponly=True, # Empêche JavaScript d'accéder au cookie
-        secure=False, # ⚠ À désactiver en développement (localhost ne supporte pas Secure)
-        samesite="Strict", # Empêche les attaques CSRF
-        max_age=7200 # Expire dans 2h
+        httponly=True, # Prevent JavaScript from accessing the cookie
+        secure=False, # To be deactivated in development (localhost does not support Secure)
+        samesite="Strict", # Prevent CSRF attacks
+        max_age=7200 # 2 hours
     )
 
     return response
 
 @auth_bp.route("/", methods=["DELETE"])
 def logout():
-    response = make_response(jsonify({"message": "Déconnexion réussie"}))
+    response = make_response()
     response.set_cookie("access_token_cookie", "", expires=0)
     return response
 
 @auth_bp.route("/", methods=["GET"])
-@jwt_required()
+@jwt_required(optional=True)
 def check():
     current_user = get_jwt_identity()
-    return jsonify({"authenticated": True, "user": current_user})
+    return jsonify({
+        "authenticated": bool(current_user),
+        "user": current_user
+    })
