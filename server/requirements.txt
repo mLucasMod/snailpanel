@@ -1,3 +1,5 @@
-flask
+aiomysql
+aiosqlite
+flask[async]
 flask-cors
 flask-jwt-extended
