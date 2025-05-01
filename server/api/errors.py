@@ -37,8 +37,12 @@ def register_errors(app: Flask):
     
     @app.errorhandler(500)
     def internal_server_error(error):
-        return http_error(500, "INTERNAL_SERVER_ERROR")
+        return http_error(500, "INTERNAL_SERVER_ERROR", str(error))
+    
+    @app.errorhandler(501)
+    def not_implemented(error):
+        return http_error(501, "NOT_IMPLEMENTED")
 
     @app.errorhandler(Exception)
-    def internal_server_error(error):
-        return http_error(500, "INTERNAL_SERVER_ERROR", str(error))
+    def unknown_error(error):
+        return http_error(520, "UNKNOWN_ERROR", str(error))

@@ -7,15 +7,15 @@ CREATE TABLE IF NOT EXISTS Users(
    UNIQUE(email)
 );
 
+CREATE TABLE IF NOT EXISTS Apps(
+   idApp VARCHAR(8),
+   name VARCHAR(50),
+   PRIMARY KEY(idApp)
+);
+
 -- CREATE TABLE AppPermissions(
 --    idAppPermission VARCHAR(50),
 --    PRIMARY KEY(idAppPermission)
--- );
-
--- CREATE TABLE Apps(
---    idApp VARCHAR(8),
---    name VARCHAR(50),
---    PRIMARY KEY(idApp)
 -- );
 
 -- CREATE TABLE Permissions(

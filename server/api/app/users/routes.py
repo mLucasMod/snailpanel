@@ -8,6 +8,10 @@ async def get_users():
     users = await UserController.getAllUsers()
     return jsonify({"users": users}), 200
 
+@user_bp.route('/me', methods=['GET'])
+async def get_user_me():
+    abort(501)
+
 @user_bp.route('/', methods=['POST'])
 async def add_user():
     data = request.json
@@ -26,10 +30,13 @@ async def get_user(user_id):
 
     return jsonify(user), 200
 
-@user_bp.route('/<int:user_id>', methods=['DELETE'])
-async def del_user(user_id):
-    result = await UserController.delUser(user_id)
+@user_bp.route('/<int:user_id>', methods=['PUT'])
+async def edit_user(user_id):
+    abort(501)
 
+@user_bp.route('/<int:user_id>', methods=['DELETE'])
+async def del_user(user_id: int):
+    result = await UserController.delUser(user_id)
     if not result:
         abort(409)
 

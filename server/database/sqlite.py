@@ -1,5 +1,5 @@
 import os
-from typing import Union
+from typing import Optional
 import aiosqlite
 from config import get_database_config
 
@@ -32,16 +32,7 @@ class Database:
             await db.commit()
 
     @staticmethod
-    async def insert(query, params=()) -> Union[int, str]:
-        db = await Database.get_instance()
-        async with aiosqlite.connect(db.db_name) as conn:
-            cursor = await conn.execute(query, params)
-            await conn.commit()
-            last_row_id = cursor.lastrowid
-            return last_row_id if isinstance(last_row_id, int) else str(last_row_id)
-
-    @staticmethod
-    async def execute(query, params=()) -> int:
+    async def insert(query, params=()) -> Optional[int]:
         db = await Database.get_instance()
         async with aiosqlite.connect(db.db_name) as conn:
             cursor = await conn.execute(query, params)
@@ -49,7 +40,15 @@ class Database:
             return cursor.lastrowid
 
     @staticmethod
-    async def fetchone(query, params=()) -> dict | None:
+    async def execute(query, params=())-> bool:
+        db = await Database.get_instance()
+        async with aiosqlite.connect(db.db_name) as conn:
+            cursor = await conn.execute(query, params)
+            await conn.commit()
+        return cursor.rowcount > 0
+
+    @staticmethod
+    async def fetchone(query, params=()) -> Optional[dict]:
         db = await Database.get_instance()
         async with aiosqlite.connect(db.db_name) as conn:
             conn.row_factory = aiosqlite.Row
