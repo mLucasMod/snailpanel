@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { signedAuthGuard, notSignedAuthGuard, SigninComponent, SignupComponent } from '../auth';
+import { notSignedAuthGuard, signedAuthGuard, SigninComponent, SignupComponent } from '../auth';
 import { DashboardComponent } from '../dashboard';
 import { ServerAddComponent, ServerListComponent, ServerViewComponent } from '../server';
 import { SettingsComponent } from '../settings';

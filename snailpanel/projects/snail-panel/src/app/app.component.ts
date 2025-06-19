@@ -1,32 +1,28 @@
-import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, HostListener } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
-import { AngularSplitModule } from 'angular-split';
-import { HeaderComponent, SidebarComponent } from '../shared';
+import { Component, HostListener, OnInit, signal } from '@angular/core';
 import { AuthService } from '@snail/api';
+import { SharedModule } from '../shared/shared.module';
+import { HeaderComponent } from './header/header.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @Component({
   selector: 'app-root',
   imports: [
-    AngularSplitModule,
-    CommonModule,
     HeaderComponent,
-    RouterModule,
-    RouterOutlet,
-    SidebarComponent,
+    SharedModule,
+    SidebarComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements AfterViewInit {
-  public isSidebarVisible = true;
+export class AppComponent implements OnInit {
+  public isSidebarVisible = signal(true);
   public innerWidth = window.innerWidth;
 
-  constructor(protected authService: AuthService) {
-    this.checkSidebarVisibility();
-  }
+  constructor(
+    protected authService: AuthService
+  ) {}
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.checkSidebarVisibility();
   }
 
@@ -37,6 +33,6 @@ export class AppComponent implements AfterViewInit {
   }
   
   private checkSidebarVisibility() {
-    this.isSidebarVisible = this.innerWidth > 768;
+    this.isSidebarVisible.set(this.innerWidth > 768);
   }
 }

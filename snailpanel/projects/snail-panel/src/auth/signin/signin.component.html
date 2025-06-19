@@ -1,7 +1,7 @@
 <div class="snail-container" style="max-width: 300px;">
     <div class="signin-form" style="text-align: center">
         <form [formGroup]="loginForm" (ngSubmit)="login()">
-            <input id="user" formControlName="user" type="text" placeholder="User"><br>
+            <input id="user" formControlName="login" type="text" placeholder="User"><br>
             <input id="password" formControlName="password" type="password" placeholder="Password"><br>
             <button type="submit">Login</button>
         </form>

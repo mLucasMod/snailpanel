@@ -1,27 +1,31 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@snail/api';
+import { SharedModule } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-signin',
-  imports: [ReactiveFormsModule],
+  imports: [SharedModule],
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.scss'
 })
 export class SigninComponent {
   protected loginForm: FormGroup;
 
-  constructor(private authService: AuthService, private fb: FormBuilder) {
-    this.loginForm = this.fb.group({
-      user: ['', Validators.required],
+  constructor(
+    private authService: AuthService,
+    private formBuilder: FormBuilder
+  ) {
+    this.loginForm = this.formBuilder.group({
+      login: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
 
-  protected async login(): Promise<void> {
+  protected login(): void {
     if (this.loginForm.valid) {
-      var { user, password } = this.loginForm.value;
-      await this.authService.login(user, password);
+      var { login, password } = this.loginForm.value;
+      this.authService.login({login, password}).subscribe();
     }
   }
 }

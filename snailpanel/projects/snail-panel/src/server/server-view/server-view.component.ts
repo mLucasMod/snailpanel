@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
-import { SnailButtonComponent } from '@snail/ui';
-import { AngularSplitModule } from 'angular-split';
+import { SharedModule } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-server-view',
-  imports: [AngularSplitModule, SnailButtonComponent],
+  imports: [SharedModule],
   templateUrl: './server-view.component.html',
   styleUrl: './server-view.component.scss'
 })
-export class ServerViewComponent {
-
-}
+export class ServerViewComponent {}

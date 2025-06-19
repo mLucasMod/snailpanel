@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '@snail/api';
 import { Button } from 'primeng/button';
 
@@ -10,9 +10,11 @@ import { Button } from 'primeng/button';
 })
 export class HeaderComponent {
 
-  constructor(protected authService: AuthService) {}
+  constructor(
+    protected authService: AuthService
+  ) {}
 
-  async logout() {
-    await this.authService.logout();
+  protected logout(): void {
+    this.authService.logout().subscribe();
   }
 }
