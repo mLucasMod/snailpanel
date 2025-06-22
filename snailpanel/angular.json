@@ -32,7 +32,8 @@
               }
             ],
             "styles": [
-              "projects/snail-panel/src/styles.scss"
+              "projects/snail-panel/src/styles.scss",
+              "projects/snail-ui/src/assets/themes/light.scss"
             ],
             "scripts": []
           },
@@ -50,7 +51,13 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "projects/snail-panel/environments/environment.ts",
+                  "with": "projects/snail-panel/environments/environment.production.ts"
+                }
+              ]
             },
             "development": {
               "optimization": false,

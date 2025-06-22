@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from '@snail/env';
 import { catchError, map, Observable, of } from 'rxjs';
 import { ActiveUser } from './active-user';
 import { LoginForm } from './login-form';
@@ -10,13 +11,15 @@ import { LoginForm } from './login-form';
 })
 export class AuthService {
   
-  private readonly authUrl = "http://192.168.1.52:5000/auth/";
+  private readonly authUrl = environment.apiUrl + "/auth/";
+  private readonly _authenticated = signal<boolean>(false);
   
   public readonly isAuthenticated = computed(() => this._authenticated());
 
-  private readonly _authenticated = signal<boolean>(false);
-
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(
+    private router: Router,
+    private http: HttpClient
+  ) {}
 
   login(loginForm: LoginForm): Observable<null> {
     return this.http.post<null>(this.authUrl, loginForm, { withCredentials: true }).pipe(

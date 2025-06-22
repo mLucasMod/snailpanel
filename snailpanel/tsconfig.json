@@ -17,6 +17,7 @@
     "importHelpers": true,
     "paths": {
       "@snail/api": ["./projects/snail-api/src/public-api.ts"],
+      "@snail/env": ["./projects/snail-panel/src/environments/environment.ts"],
       "@snail/ui": ["./projects/snail-ui/src/public-api.ts"]
     },
     "target": "ES2022",

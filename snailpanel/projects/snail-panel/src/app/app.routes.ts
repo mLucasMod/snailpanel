@@ -1,11 +1,11 @@
-import { Routes } from '@angular/router';
-import { notSignedAuthGuard, signedAuthGuard, SigninComponent, SignupComponent } from '../auth';
-import { DashboardComponent } from '../dashboard';
-import { ServerAddComponent, ServerListComponent, ServerViewComponent } from '../server';
-import { SettingsComponent } from '../settings';
-import { TemplateAddComponent, TemplateListComponent, TemplateViewComponent } from '../template';
-import { UserAddComponent, UserListComponent, UserViewComponent } from '../user';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { Routes } from "@angular/router";
+import { SigninComponent, SignupComponent } from "./auth";
+import { NotFoundComponent, notSignedAuthGuard, signedAuthGuard } from "./core";
+import { DashboardComponent } from "./dashboard";
+import { ServerAddComponent, ServerListComponent, ServerViewComponent } from "./server";
+import { SettingsComponent } from "./settings";
+import { TemplateAddComponent, TemplateListComponent, TemplateViewComponent } from "./templates";
+import { UserAddComponent, UserListComponent, UserViewComponent } from "./user";
 
 export const routes: Routes = [
     {
@@ -93,7 +93,6 @@ export const routes: Routes = [
     {
         path: '**',
         title: "Snailpanel - Not found",
-        // canActivate: [signedAuthGuard],
         component: NotFoundComponent
     }
 ]
