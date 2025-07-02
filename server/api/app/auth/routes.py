@@ -1,7 +1,10 @@
 from datetime import timedelta
+
 from flask import Blueprint, abort, jsonify, make_response, request
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
+
 from api.app.auth.controller import AuthController
+from api.app.users.controller import UserController
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -19,7 +22,7 @@ async def login():
     if not user:
         abort(401)
 
-    access_token = create_access_token(identity=user.username, expires_delta=timedelta(hours=2))
+    access_token = create_access_token(identity=str(user.id), expires_delta=timedelta(hours=2))
 
     # TODO get from config file
     # Set a secure HttpOnly cookie
@@ -43,9 +46,15 @@ def logout():
 
 @auth_bp.route("/", methods=["GET"])
 @jwt_required(optional=True)
-def check():
-    current_user = get_jwt_identity()
-    return jsonify({
-        "authenticated": bool(current_user),
-        "user": current_user
-    })
+async def check():
+    current_user = await UserController.getUser(get_jwt_identity())
+    if current_user:
+        return jsonify({
+            "authenticated": True,
+            "user": current_user
+        })
+    else: 
+        return jsonify({
+            "authenticated": False,
+            "user": None
+        })

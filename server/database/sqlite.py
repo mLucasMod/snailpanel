@@ -1,7 +1,12 @@
 import os
 from typing import Optional
+
 import aiosqlite
+from werkzeug.exceptions import HTTPException
+
 from config import get_database_config
+
+class DatabaseError(HTTPException): ...
 
 # TODO generic Database class
 # TODO support SQLite and MySQL
@@ -33,34 +38,46 @@ class Database:
 
     @staticmethod
     async def insert(query, params=()) -> Optional[int]:
-        db = await Database.get_instance()
-        async with aiosqlite.connect(db.db_name) as conn:
-            cursor = await conn.execute(query, params)
-            await conn.commit()
-            return cursor.lastrowid
+        try:
+            db = await Database.get_instance()
+            async with aiosqlite.connect(db.db_name) as conn:
+                cursor = await conn.execute(query, params)
+                await conn.commit()
+                return cursor.lastrowid
+        except Exception:
+            raise DatabaseError()
 
     @staticmethod
     async def execute(query, params=())-> bool:
-        db = await Database.get_instance()
-        async with aiosqlite.connect(db.db_name) as conn:
-            cursor = await conn.execute(query, params)
-            await conn.commit()
-        return cursor.rowcount > 0
+        try:
+            db = await Database.get_instance()
+            async with aiosqlite.connect(db.db_name) as conn:
+                cursor = await conn.execute(query, params)
+                await conn.commit()
+            return cursor.rowcount > 0
+        except Exception:
+            raise DatabaseError()
 
     @staticmethod
     async def fetchone(query, params=()) -> Optional[dict]:
-        db = await Database.get_instance()
-        async with aiosqlite.connect(db.db_name) as conn:
-            conn.row_factory = aiosqlite.Row
-            cursor = await conn.execute(query, params)
-            row = await cursor.fetchone()
-            return dict(row) if row else None
+        try:
+            db = await Database.get_instance()
+            async with aiosqlite.connect(db.db_name) as conn:
+                conn.row_factory = aiosqlite.Row
+                cursor = await conn.execute(query, params)
+                row = await cursor.fetchone()
+                return dict(row) if row else None
+        except Exception:
+            raise DatabaseError()
 
     @staticmethod
     async def fetchall(query, params=()) -> list[dict]:
-        db = await Database.get_instance()
-        async with aiosqlite.connect(db.db_name) as conn:
-            conn.row_factory = aiosqlite.Row
-            cursor = await conn.execute(query, params)
-            rows = await cursor.fetchall()
-            return [dict(row) for row in rows]
+        try:
+            db = await Database.get_instance()
+            async with aiosqlite.connect(db.db_name) as conn:
+                conn.row_factory = aiosqlite.Row
+                cursor = await conn.execute(query, params)
+                rows = await cursor.fetchall()
+                return [dict(row) for row in rows]
+        except Exception:
+            raise DatabaseError()

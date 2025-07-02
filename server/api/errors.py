@@ -1,5 +1,7 @@
 from flask import Flask, jsonify
 
+from database.sqlite import DatabaseError
+
 def http_error(status, error, message=None):
     res = {"status": status, "error": error}
     if message:
@@ -34,6 +36,10 @@ def register_errors(app: Flask):
     @app.errorhandler(422)
     def unprocessable_entity(error):
         return http_error(422, "UNPROCESSABLE_ENTITY")
+    
+    @app.errorhandler(DatabaseError)
+    def database_error(error):
+        return http_error(500, "DATABASE_ERROR", str(error))
     
     @app.errorhandler(500)
     def internal_server_error(error):

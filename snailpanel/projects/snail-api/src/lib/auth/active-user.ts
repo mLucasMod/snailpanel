@@ -1,4 +1,6 @@
+import { User } from "@snail/api";
+
 export interface ActiveUser {
     authenticated: boolean;
-    user: string | null;
+    user: User | null;
 }

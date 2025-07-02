@@ -12,7 +12,7 @@ class User:
     @staticmethod
     def from_json(data: dict) -> 'User':
         return User(
-            id=data.get("idUser"),
+            id=data.get("id") or data.get("idUser"),
             username=data.get("username"),
             email=data.get("email")
         )

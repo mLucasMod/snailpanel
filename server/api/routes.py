@@ -1,4 +1,5 @@
 from flask import Flask, send_from_directory
+
 from api.app.auth.routes import auth_bp
 from api.app.servers.routes import server_bp
 from api.app.users.routes import user_bp

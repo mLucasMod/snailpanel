@@ -1,6 +1,8 @@
-from flask import Flask, jsonify
+from flask import Flask
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
+
+from api.errors import http_error
 from config import get_api_config
 
 def init_extensions(app: Flask):
@@ -12,21 +14,17 @@ def init_extensions(app: Flask):
     app.config["JWT_COOKIE_SECURE"] = config["cookie_secure"] # Set True for production (HTTPS only)
     app.config["JWT_COOKIE_CSRF_PROTECT"] = config["cookie_csrf_protect"] # Disable CSRF protection for Postman (to be activated later)
 
-    @jwt.expired_token_loader
-    def expired_token(jwt_header, jwt_payload):
-        return (
-            jsonify({"status": 401, "error": "TOKEN_EXPIRED"}), 401,
-        )
     @jwt.invalid_token_loader
     def invalid_token(error):
-        return (
-            jsonify({"status": 401, "error": "INVALID_TOKEN"}), 401,
-        )
+        return http_error(401, "UNAUTHORIZED", "INVALID_TOKEN")
+
+    @jwt.expired_token_loader
+    def expired_token(jwt_header, jwt_payload):
+        return http_error(401, "UNAUTHORIZED", "TOKEN_EXPIRED")
+
     @jwt.unauthorized_loader
     def missing_token(error):
-        return (
-            jsonify({"status": 401, "error": "TOKEN_MISSING",}), 401,
-        )
+        return http_error(401, "UNAUTHORIZED", "TOKEN_MISSING")
 
     config = get_api_config("cors")
     CORS(

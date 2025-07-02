@@ -1,4 +1,5 @@
 from typing import List, Union
+
 from api.app.users.entity import User
 from database.sqlite import Database
 
