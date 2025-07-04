@@ -1,3 +1,5 @@
-.app-content {
-    padding: 20px;
+.app-content ::ng-deep {
+    height: 100%;
+    padding: 1.25em;
+    background-color: khaki;
 }

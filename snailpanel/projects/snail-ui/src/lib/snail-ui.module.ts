@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { SnailButtonComponent } from './button/button.component';
-import { SnailInputComponent } from './input/input.component';
+import { SnailTextFieldComponent } from './text-field/text-field.component';
 import { SnailToastComponent } from './toast/toast.component';
 
 const importsExports = [
   SnailButtonComponent,
-  SnailInputComponent,
+  SnailTextFieldComponent,
   SnailToastComponent
 ]
 

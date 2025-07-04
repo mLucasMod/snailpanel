@@ -1,0 +1,15 @@
+:host {
+    --p-inputtext-padding-x: 0.75rem;
+    --p-inputtext-padding-y: 0.25rem;
+
+    --p-inputtext-disabled-background: var(--color-level3-fill);
+    --p-inputtext-disabled-color: var(--color-level3-font);
+
+    --p-inputtext-placeholder-color: var(--color-level5-fill);
+    --p-inputtext-background: var(--color-standard-fill);
+    --p-inputtext-color: var(--color-standard-font);
+
+    --p-inputtext-border-color: var(--color-primary-fill);
+    --p-inputtext-hover-border-color: var(--color-primary-hover-fill);
+    --p-inputtext-focus-border-color: var(--color-primary-active-fill);
+}
