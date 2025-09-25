@@ -3,3 +3,4 @@
  */
 
 export * from './lib/snail-ui.module';
+export * from './lib/toast/toast.service';
