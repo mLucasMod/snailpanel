@@ -1,0 +1,20 @@
+{
+    "host": "0.0.0.0",
+    "port": 5000,
+    "cors": {
+        "supportsCredentials": true,
+        "origins": ["http://localhost:4200"],
+        "allowHeaders": ["Content-Type", "Authorization"],
+        "allowMethods": ["GET", "POST", "PATCH", "DELETE", "OPTIONS"]
+    },
+    "jwt": {
+        "secret": "1234",
+        "expiresIn": 3600000
+    },
+    "cookie": {
+        "httpOnly": true,
+        "secure": true,
+        "sameSite": "strict",
+        "maxAge": 3600000
+    }
+}

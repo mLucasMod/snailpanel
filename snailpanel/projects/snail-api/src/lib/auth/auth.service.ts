@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { computed, Injectable, signal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '@snail/api';
 import { environment } from '@snail/env';
 import { catchError, map, Observable, of } from 'rxjs';
-import { ActiveUser } from './active-user';
+import { AuthSession } from './auth-session';
 import { LoginForm } from './login-form';
 
 @Injectable({
@@ -15,10 +14,15 @@ export class AuthService {
   private readonly authUrl = environment.apiUrl + "/auth";
 
   private readonly _authenticated = signal<boolean>(false);
-  private readonly _user = signal<User | null>(null);
+  private readonly _user = signal<string | null>(null);
 
-  public readonly isAuthenticated = computed(() => this._authenticated());
-  public readonly getActiveUser = computed(() => this._user());
+  public get isAuthenticated(): boolean {
+    return this._authenticated();
+  }
+
+  public get activeUser(): string | null {
+    return this._user();
+  }
 
   constructor(
     private router: Router,
@@ -46,11 +50,11 @@ export class AuthService {
   }
 
   refresh(): Observable<boolean> {
-    return this.http.get<ActiveUser>(this.authUrl, { withCredentials: true }).pipe(
-      map((activeUser) => {
-        this._authenticated.set(activeUser.authenticated);
-        this._user.set(activeUser.user);
-        return activeUser.authenticated;
+    return this.http.get<AuthSession>(this.authUrl, { withCredentials: true }).pipe(
+      map((auth) => {
+        this._authenticated.set(auth.authenticated);
+        this._user.set(auth.user);
+        return auth.authenticated;
       }),
       catchError(() => {
         this._authenticated.set(false);

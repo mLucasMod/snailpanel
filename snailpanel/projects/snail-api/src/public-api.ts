@@ -2,7 +2,7 @@
  * Public API Surface of snail-api
  */
 
-export * from './lib/auth/active-user';
+export * from './lib/auth/auth-session';
 export * from './lib/auth/auth.service';
 export * from './lib/auth/login-form';
 
