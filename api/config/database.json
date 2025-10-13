@@ -1,0 +1,5 @@
+{
+    "driver": "sqlite",
+    "filepath": "data",
+    "filename": "database.db"
+}
